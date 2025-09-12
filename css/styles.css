@@ -29,12 +29,75 @@ body{
 .section{ overflow:auto; }
 
 /* =========================================
-   1) Header (공통)
+   1) 메뉴: 네비게이션
    ========================================= */
-.site-header{ display:flex; align-items:center; gap:16px; padding:18px 0; }
-.logo{ display:flex; align-items:center; gap:10px; text-decoration:none; }
-.logo img{ width:46px; height:46px; object-fit:contain; }
-.logo span{ font-weight:800; letter-spacing:.02em; color:var(--brand); }
+:root{
+  --nav-h: 72px;
+}
+
+/* 전체 페이지가 고정 네비 높이만큼 아래에서 시작 */
+body{ padding-top: var(--nav-h); }
+
+.site-nav{
+  position: fixed; inset: 0 0 auto 0; height: var(--nav-h);
+  background: var(--brand);        /* 메인 파란색 */
+  z-index: 1000;
+  box-shadow: 0 0 0 rgba(0,0,0,0); /* 스크롤 전엔 그림자 없음 */
+  transition: box-shadow .18s ease, background .18s ease;
+}
+.site-nav.is-scrolled{
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+}
+
+.nav__inner{
+  height: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.nav__logo{
+  color:#fff; text-decoration:none; font-weight: 900; letter-spacing:.2px;
+  font-size: clamp(18px, 2.2vw, 26px);
+}
+
+/* 메뉴(데스크톱) */
+.nav__menu{
+  display: flex; gap: clamp(16px, 3vw, 44px); align-items: center;
+}
+.nav__link{
+  color:#fff; text-decoration:none; font-weight:800;
+  font-size: clamp(14px, 1.6vw, 18px);
+  padding: 8px 4px; position: relative;
+}
+.nav__link:is(:hover,.is-active){ opacity:.95; }
+.nav__link:is(:focus-visible){ outline: none; box-shadow: var(--ring); border-radius:8px; }
+
+/* 모바일 토글 버튼 */
+.nav__toggle{
+  display:none;
+  width:40px; height:40px; border:0; background:transparent; color:#fff; cursor:pointer;
+}
+.nav__bar{ display:block; width:24px; height:2px; background:#fff; margin:5px auto; border-radius:2px; }
+
+/* 반응형: 모바일에선 드롭다운 */
+@media (max-width: 980px){
+  :root{ --nav-h: 64px; }               /* 모바일 네비 높이 줄이기 */
+  .nav__toggle{ display:block; }
+  .nav__menu{
+    position: absolute; left:0; right:0; top: var(--nav-h);
+    background: var(--brand);
+    display: grid; gap: 0;
+    transform: translateY(-8px);
+    opacity:0; pointer-events:none;
+    border-bottom: 1px solid rgba(255,255,255,.15);
+  }
+  .nav__menu a{ padding:14px 20px; border-top:1px solid rgba(255,255,255,.12); }
+  /* 열림 상태 */
+  .nav__menu.is-open{
+    opacity:1; transform: translateY(0); pointer-events: auto;
+  }
+  /* 본문 스크롤 잠금 (선택) */
+  body.nav-open{ overflow: hidden; }
+}
 
 /* =========================================
    2) Section 1 : Hero (영웅 섹션)
@@ -711,3 +774,81 @@ body{
   .lf__grid{ grid-template-columns:1fr; }
 }
 
+/* 네비게이션 - 메뉴버튼 앵커로 이동 시 부드럽게 */
+html{ scroll-behavior:smooth; }
+
+/* 고정 네비게이션에 가리지 않도록 여백 보정 */
+.hero, .section{ scroll-margin-top: calc(var(--nav-h, 72px) + 8px); }
+
+/* ===================== */
+/* Footer */
+/* ===================== */
+.site-footer{
+  background:#fff;
+  color: var(--ink);
+  border-top: 1px solid #e9eef6;
+}
+
+.footer__inner{
+  display:grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(20px, 4vw, 48px);
+  padding: clamp(28px, 5vw, 48px) 0;
+}
+
+/* 로고 */
+.footer__logo{
+  display:flex; align-items:baseline; gap:14px; margin-bottom:10px;
+}
+.footer__logo-en{
+  color: var(--brand);
+  font-weight: 900;
+  font-size: clamp(22px, 3vw, 36px);
+  letter-spacing:.2px;
+}
+.footer__logo-ko{
+  color:#697a8f;
+  font-weight: 800;
+  font-size: clamp(15px, 1.6vw, 20px);
+}
+
+/* 소개문 */
+.footer__slogan{
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: clamp(14px, 1.6vw, 17px);
+}
+
+/* 사업자 정보 */
+.footer__org{ align-self:start; }
+.footer__item{
+  display:grid; grid-template-columns: 120px 1fr;
+  gap: 8px; margin: 8px 0; font-size: clamp(14px, 1.5vw, 16px);
+  color:#334;
+}
+.footer__item .k{ color:#6b7a8f; }
+.footer__item .v{ color:#2b3850; }
+.footer__item a.v{ color:#2b3850; text-decoration:none; border-bottom:1px dotted rgba(31,95,174,.35); }
+
+/* 하단 바(카피라이트) */
+.footer__bar{
+  border-top: 1px solid #edf2f7;
+  background: linear-gradient(to bottom, #fff, #fafcff);
+}
+.footer__copy{
+  margin:0; padding: 14px 0 18px;
+  color:#617089; font-size: 13px;
+}
+
+/* 반응형 */
+@media (max-width: 980px){
+  .footer__inner{ grid-template-columns:1fr; }
+  .footer__item{ grid-template-columns: 100px 1fr; }
+}
+
+/* 시각적 숨김(접근성용) */
+.sr-only{
+  position:absolute !important; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+}

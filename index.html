@@ -15,22 +15,36 @@
 </head>
 
 <body>
-  <!-- Header -->
-  <header class="site-header container" aria-label="상단 로고">
-    <a class="logo" href="#" aria-label="바른상생연구소 홈페이지 링크">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Blue_circle.png" alt="로고" />
-      <span>바른상생연구소</span>
+  <!--HTML 헤더,메뉴바-->
+<header class="site-nav" role="navigation" aria-label="주요 메뉴">
+  <div class="container nav__inner">
+    <!-- 좌측 로고 -->
+    <a href="#hero" class="nav__logo" aria-label="사업자 홈">
+      <strong>정책자금 솔루션</strong>
     </a>
-  </header>
+
+    <!-- 모바일 햄버거 -->
+    <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="메뉴 열기">
+      <span class="nav__bar"></span>
+      <span class="nav__bar"></span>
+      <span class="nav__bar"></span>
+    </button>
+
+    <!-- 우측 메뉴 -->
+    <nav id="nav-menu" class="nav__menu" aria-label="상단 메뉴">
+      <a class="nav__link" href="#testimonial">성공사례</a>
+      <a class="nav__link" href="#proccess">신청절차</a>
+      <a class="nav__link" href="#contact">무료상담</a>
+    </nav>
+  </div>
+</header>
 
   <!-- 섹션1 - Hero -->
-  <main class="hero">
-
+  <main class="hero" id="hero">
     <div class="container hero-inner">
       <!-- 좌측: 비주얼 -->
       <figure class="hero-visual" aria-label="정책자금 안내 비주얼">
-        <!-- ⚠️ hero.png 파일을 프로젝트 폴더에 준비하거나 경로를 수정하세요. -->
-        <img src="hero.png" alt="정부정책자금 비주얼 이미지" />
+        <img src="./img/hero001.png" alt="정부정책자금 비주얼 이미지" />
       </figure>
 
       <!-- 우측: 카피 & CTA -->
@@ -85,9 +99,9 @@
     </div>
 
   <!--섹션2 시작 -->
-  <section class="section testimonials" aria-label="성공 사례">
+  <section class="section testimonials" id="testimonial" aria-label="성공 사례">
   <div class="section__head">
-    <h1 class="section__title">5,234건 승인 성공!<br>수많은 기업이 신뢰한 정책자금 솔루션<br></h1>
+    <h1 class="section__title">5,234건 승인 성공사례!<br>수많은 기업이 신뢰한 정책자금 솔루션<br></h1>
     <p class="section__desc">정책자금 솔루션과 함께한 대표님들의 리얼 후기를 확인해보세요</p>
   </div>
 
@@ -246,9 +260,8 @@
 </section>
   <!--섹션2 끝 -->
   <!--섹션3 시작 (신청절차)-->
-<section class="section promises" aria-labelledby="promises-title">
+<section class="section promises"  id="proccess" aria-labelledby="promises-title">
   <div class="promises__bg" aria-hidden="true"></div>
-
   <div class="section__head">
     <h2 id="promises-title" class="section__title">정책자금 솔루션 간편절차</h2>
     <p class="section__desc">기업 운영에 꼭 맞는 자금을 빠르게! 복잡함 없이 곧바로 만나보세요.</p>
@@ -469,7 +482,7 @@
 <!-- ===================== -->
 <!-- Section 6 · Lead Form -->
 <!-- ===================== -->
-<section class="section leadform" aria-labelledby="leadform-title">
+<section class="section leadform" id="contact" aria-labelledby="leadform-title">
   <!-- 흐릿 사진 + 오버레이 -->
   <div class="leadform__bg" aria-hidden="true"></div>
 
@@ -618,13 +631,52 @@
   </div>
 </section>
 <!--섹션6 끝 -->
-  </main>
+</main>
 
 <!--자바스크립트-->
-<!-- 그래프 막대가 높이 변화에 애니메이션 되도록 (styles.css에 1줄 추가) -->
-<style>
-  .ts__miniChart .ts__bar{ transition: height .9s cubic-bezier(.22,.61,.36,1); }
-</style>
+<!-- 헤더 메뉴바 (네비게이션) -->
+<script>
+// 네비 높이 변화에 따라 body padding-top 자동 보정
+(() => {
+  const nav = document.querySelector('.site-nav');
+  if(!nav) return;
+  const setPT = () => { document.body.style.paddingTop = nav.offsetHeight + 'px'; };
+  setPT(); window.addEventListener('resize', setPT);
+})();
+
+// 기존 토글 훅을 확장: 열림 상태에서 본문 스크롤 잠금
+(() => {
+  const toggle = document.querySelector('.nav__toggle');
+  const menu   = document.getElementById('nav-menu');
+  if(!toggle || !menu) return;
+
+  const setOpen = (open) => {
+    toggle.setAttribute('aria-expanded', open);
+    menu.classList.toggle('is-open', open);
+    document.body.classList.toggle('nav-open', open);
+  };
+
+  toggle.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    setOpen(open);
+  });
+
+  // 메뉴 클릭 시 닫기
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+
+  // ESC로 닫기
+  window.addEventListener('keydown', (e) => { if(e.key === 'Escape') setOpen(false); });
+})();
+
+// 스크롤 그림자 (이미 있다면 중복 제거해도 OK)
+(() => {
+  const head = document.querySelector('.site-nav');
+  if(!head) return;
+  const onScroll = () => head.classList.toggle('is-scrolled', window.scrollY > 6);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive:true });
+})();
+</script>
 
 <!--섹션2. 슬라이드 JS-->
 <script>
@@ -856,6 +908,40 @@ form?.querySelectorAll('input, select, textarea').forEach(el => {
 });
 </script>
 
+<!-- ===================== -->
+<!-- Footer -->
+<!-- ===================== -->
+<footer class="site-footer" aria-labelledby="footer-title">
+  <h2 id="footer-title" class="sr-only">사이트 정보</h2>
 
+  <div class="container footer__inner">
+    <!-- 좌측: 로고/소개 -->
+    <div class="footer__brand">
+      <div class="footer__logo" aria-label="DB POTENT 디비포텐">
+        <span class="footer__logo-en">사업자 이름</span>
+        <span class="footer__logo-ko">사업자 이름</span>
+      </div>
+
+      <p class="footer__slogan">
+        업종별 맞춤 최대한도& 최저금리 승인전략을 제시하는<br>
+        검증된 정책자금 컨설팅 서비스
+      </p>
+    </div>
+
+    <!-- 우측: 사업자 정보 -->
+    <div class="footer__org" role="list">
+      <p class="footer__item" role="listitem"><span class="k">대표</span><span class="v">강민우</span></p>
+      <p class="footer__item" role="listitem"><span class="k">상호</span><span class="v">리코 코퍼레이션</span></p>
+      <p class="footer__item" role="listitem"><span class="k">사업자등록번호</span><span class="v">366-03-03344</span></p>
+    </div>
+  </div>
+
+  <!-- 하단 바 -->
+  <div class="footer__bar">
+    <div class="container">
+      <p class="footer__copy">사업자 이름 © All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
