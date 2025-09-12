@@ -917,35 +917,17 @@
   let timer = null;
   let isPaused = false;
 
-  /* ========== 그래프 애니메이션: scaleY만 사용 (컨테이너 고정) ========== */
-  // 시작 상태: 모두 scaleY(0)
-  function primeBars() {
-    slides.forEach(slide => {
-      slide.querySelectorAll('.ts__miniChart .ts__bar').forEach(bar => {
-        bar.style.transform = 'scaleY(0)';
-      });
-    });
+  /* ───────── 슬라이더 기본 동작 ───────── */
+  function activate(i){
+    slides.forEach(s => s.classList.remove('is-active'));
+    slides[i]?.classList.add('is-active'); // ← 활성 슬라이드에서만 막대가 scaleY(목표)로 채워짐
   }
 
-  // 현재 슬라이드 막대만 0 -> 1로 (순차 지연)
-  function animateBarsFor(i){
-    const cur = slides[i];
-    if(!cur) return;
-    const bars = Array.from(cur.querySelectorAll('.ts__miniChart .ts__bar'));
-    bars.forEach((bar, idx) => {
-      // 리셋(다른 슬라이드 포함)
-      primeBars();
-      // 지연 후 채우기
-      setTimeout(() => { bar.style.transform = 'scaleY(1)'; }, idx * 140);
-    });
-  }
-
-  /* ========== 슬라이더 ========== */
   function goTo(i) {
     index = (i + slides.length) % slides.length;
     track.style.transform = `translate3d(${-index * 100}%,0,0)`;
     dots.forEach((d, di) => d.setAttribute('aria-selected', di === index ? 'true' : 'false'));
-    animateBarsFor(index);
+    activate(index);
   }
   function next(){ goTo(index + 1); }
   function prev(){ goTo(index - 1); }
@@ -970,13 +952,14 @@
   let sx = 0, dx = 0;
   root.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; dx = 0; }, {passive:true});
   root.addEventListener('touchmove',  (e) => { dx = e.touches[0].clientX - sx; }, {passive:true});
-  root.addEventListener('touchend',   ()  => { if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); start(); } });
+  root.addEventListener('touchend',   ()  => {
+    if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); start(); }
+  });
 
-  // 초기 진입 시 1회 세팅
+  // 초기 진입: 섹션이 보이면 1번 슬라이드 활성화
   const io = new IntersectionObserver((entries) => {
     if (entries.some(e => e.isIntersecting)) {
-      primeBars();  // 모두 0으로
-      goTo(0);      // 슬라이드 표시 + 현재 슬라이드만 채우기
+      goTo(0);
       start();
       io.disconnect();
     }

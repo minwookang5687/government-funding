@@ -194,8 +194,6 @@ body{ padding-top: var(--nav-h); }
    2) Section 2 : Testimonials (사용자 후기)
    ========================================= */
 .section.testimonials{
-  /* ▼ 우측(사진/그래프) 패널 공통 높이 변수 */
-  --ts-panel-h: clamp(280px, 40vw, 360px);
   padding-block: clamp(48px, 6vw, 88px);
   background: var(--bg-start);
 }
@@ -329,24 +327,16 @@ body{ padding-top: var(--nav-h); }
   justify-items:center;
 }
 
-/* 래퍼를 동일 높이로 고정 */
-.section.testimonials .ts__photoWrap,
-.section.testimonials .ts__chartWrap{
-  height: var(--ts-panel-h);
-  min-height: var(--ts-panel-h);
-}
-
-/* 사진 */
 .section.testimonials .ts__photo{
   width:100%;
-  height:100%;                   /* ← 래퍼 높이에 맞춰 동일 높이 */
+  height: clamp(280px, 40vw, 350px);
   object-fit:cover;
   border-radius:22px;
   box-shadow:0 8px 18px rgba(11,37,64,.08);
   display:block;
 }
 
-/* 그래프 컨테이너 */
+/* 그래프 컨테이너(고정 높이 + 넘침 방지) */
 .section.testimonials .ts__miniChart{
   width:100%; height:100%;
   border-radius:22px; border:1px solid #eef3fa;
@@ -359,22 +349,33 @@ body{ padding-top: var(--nav-h); }
     #ffffff 28px,
     rgba(31,95,174,0.25) 29px
   );
+  overflow:hidden;
 }
 
-/* 그래프 막대: 레이아웃 고정(높이는 유지), 애니메이션은 scaleY 만 */
+/* ── 막대: 높이는 100%, 값은 scaleY로 표현 ── */
 .section.testimonials .ts__miniChart .ts__bar{
-  /* height 트랜지션 제거 */
+  position:relative;
+  width:56px;
+  height:100%;
+  border-radius:12px 12px 6px 6px;
+  display:flex; align-items:end; justify-content:center;
+  transform-origin: bottom;
+  transform: scaleY(0);                 /* 초기 상태 */
   transition: transform .9s cubic-bezier(.22,.61,.36,1);
 }
-.section.testimonials .ts__bar{
-  position:relative; width:56px;
-  border-radius:12px 12px 6px 6px; display:flex; align-items:end; justify-content:center;
-  transform-origin: bottom;        /* 아래에서 위로 */
-  transform: scaleY(0);            /* 시작 상태(0) – JS에서 1로 변경 */
+.section.testimonials .ts__bar span{
+  position:absolute; bottom:-28px; font-size:14px; color:#233043;
 }
-.section.testimonials .ts__bar span{ position:absolute; bottom:-28px; font-size:14px; color:#233043; }
-.section.testimonials .ts__bar--before{ height:80px;  background:#cbd5e1; }
-.section.testimonials .ts__bar--after { height:270px; background:linear-gradient(to top, var(--accent), #5da1ff); }
+
+/* 기본 목표값 (필요 시 슬라이드별로 덮어쓰기 가능) */
+.section.testimonials .ts__bar--before{ background:#cbd5e1; }
+.section.testimonials .ts__bar--after { background:linear-gradient(to top, var(--accent), #5da1ff); }
+
+/* 활성 슬라이드에서만 목표값으로 채우기 */
+.section.testimonials .ts__slide.is-active .ts__bar--before{ --target:.32; transform: scaleY(var(--target)); }
+.section.testimonials .ts__slide.is-active .ts__bar--after { --target:.92; transform: scaleY(var(--target)); }
+
+/* 배지 */
 .section.testimonials .ts__badge{
   position:absolute; top:-12px; right:-10px; background:#fff; border:1px solid #e6ecf5; border-radius:10px;
   padding:6px 10px; font-size:12px; text-align:center; color:#1b2a44; box-shadow:0 6px 14px rgba(11,37,64,.08);
@@ -390,9 +391,6 @@ body{ padding-top: var(--nav-h); }
 /* ---------- 모바일(Testimonials) : iOS/Android 공통 안정화 ---------- */
 @media (max-width: 980px){
 
-  /* 모바일에서 패널 높이만 살짝 조정 */
-  .section.testimonials{ --ts-panel-h: clamp(220px, 55vw, 300px); }
-
   /* 전체 2단을 1단으로: 카피 1번, 우측 큰 박스 2번 */
   .section.testimonials .section__body{ width:min(100%, 94vw); }
   .section.testimonials .ts{ grid-template-columns:1fr; }
@@ -407,7 +405,7 @@ body{ padding-top: var(--nav-h); }
     min-width: 0;
   }
 
-  /* 우측 큰 박스는 '반드시' 가로 2열 유지 */
+  /* 우측 큰 박스는 가로 2열 고정 */
   .section.testimonials .ts__right{
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -418,18 +416,18 @@ body{ padding-top: var(--nav-h); }
     overflow: hidden;
   }
 
-  /* 자식 래퍼: 넘침/줄바꿈 방지 */
+  /* 자식 래퍼 */
   .section.testimonials .ts__photoWrap,
   .section.testimonials .ts__chartWrap{
     display: flex;
     flex-direction: column;
     min-width: 0;
     min-height: 0;
-    height: var(--ts-panel-h);
-    min-height: var(--ts-panel-h);
   }
 
+  /* 그래프/사진 동일 행 높이 */
   .section.testimonials .ts__miniChart{
+    flex: 1;
     height: 100%;
     border-radius: 18px;
     padding: 14px 14px 30px;
@@ -440,16 +438,15 @@ body{ padding-top: var(--nav-h); }
     height: 100%;
     object-fit: cover;
     border-radius: 18px;
-    aspect-ratio: auto; /* 혹시 남아있을 고정 비율 제거 */
+    aspect-ratio: auto;
     min-width: 0;
   }
 
-  /* 라벨 보정(선택) */
+  /* 라벨/배지 보정 */
   .section.testimonials .ts__bar span{ bottom:-24px; font-size:13px; }
   .section.testimonials .ts__badge{ top:-10px; right:-8px; font-size:11px; }
   .section.testimonials .ts__badge b{ font-size:14px; }
 }
-
 
 
 /* =========================================
