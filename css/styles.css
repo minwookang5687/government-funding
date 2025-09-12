@@ -215,8 +215,8 @@ body{ padding-top: var(--nav-h); }
 .section.testimonials .section__desc{
   margin-top: 10px;
   color: var(--muted);
-  font-size: clamp(15px, 1.8vw, 20px); /* 조금 더 큼 */
-  line-height: 1.7;                   /* 행간 */
+  font-size: clamp(15px, 1.8vw, 20px);
+  line-height: 1.7;
 }
 
 /* 본문 너비 */
@@ -262,22 +262,22 @@ body{ padding-top: var(--nav-h); }
 
 /* 좌: 텍스트 / 우: 사진+그래프 */
 .section.testimonials .ts__grid{
-  --left-col:1fr; --right-col:1fr;
+  --left-col:1.3fr; --right-col:1fr;
   display:grid;
   grid-template-columns:var(--left-col) var(--right-col);
   align-items:center;
-  gap: clamp(24px, 3.4vw, 44px); /* 두 칼럼 간격 조금 확대 */
+  gap: clamp(24px, 3.4vw, 44px);
 }
 
-/* ── 왼쪽 텍스트 패널(연한 배경 + 넉넉한 여백) ── */
+/* ── 왼쪽 텍스트 패널 ── */
 .section.testimonials .ts__copy{
-  --copy-gutter: clamp(20px, 2.8vw, 32px); /* 공통 좌우 패딩 */
-  --copy-max: 640px;
+  --copy-gutter: clamp(20px, 2.8vw, 32px);
+  --copy-max: 850px;
 
-  background: #f3f7ff;                  /* 아주 연한 패널톤 */
+  background: #f3f7ff;
   border: 1px solid #e6eef9;
   border-radius: 16px;
-  padding: var(--copy-gutter);          /* 전체 여백 확보 */
+  padding: var(--copy-gutter);
   box-shadow: 0 6px 18px rgba(11,37,64,.05);
   text-align:left;
 }
@@ -285,12 +285,11 @@ body{ padding-top: var(--nav-h); }
 .section.testimonials .ts__quote{
   max-width: var(--copy-max);
 }
-/* 헤더(이름/칩/메타)도 동일 좌우 패딩 정렬 */
 .section.testimonials .ts__copyHead{ margin:0 0 clamp(12px,1.4vw,16px); }
 
 .section.testimonials .ts__headline{
   display:flex; flex-wrap:wrap; align-items:baseline; gap:10px;
-  font-size: clamp(20px, 2.6vw, 28px); /* 한 단계 키움 */
+  font-size: clamp(20px, 2.6vw, 28px);
   color: var(--ink);
   margin:0;
 }
@@ -311,32 +310,32 @@ body{ padding-top: var(--nav-h); }
 }
 .section.testimonials .ts__meta strong{ color:var(--ink); }
 
-/* 인용문(흰 카드) – 널널하게 */
+/* 인용문 카드 */
 .section.testimonials blockquote.ts__quote{
   background:#fff;
   border:1px solid #e8eef6;
-  padding: clamp(18px, 2.2vw, 26px);     /* 패딩 확대 */
+  padding: clamp(18px, 2.2vw, 26px);
   border-radius:14px;
-  line-height:1.75;                      /* 가독성 */
+  line-height:1.75;
   color:#334;
   box-shadow:0 6px 18px rgba(11,37,64,.06);
-  margin: clamp(14px, 1.6vw, 18px) 0 0;  /* 위쪽만 여백 */
+  margin: clamp(14px, 1.6vw, 18px) 0 0;
   box-sizing:border-box;
   text-align:left;
 }
 
-/* ── 오른쪽: 사진/그래프 (동일 높이) ── */
+/* ── 오른쪽: 사진/그래프 ── */
 .section.testimonials .ts__right{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr 1fr; /* 좌우 반반 */
   gap: clamp(16px, 2vw, 24px);
-  align-items:stretch;
+  align-items:stretch;           /* 같은 행 높이 */
   justify-items:center;
 }
 
 .section.testimonials .ts__photo{
   width:100%;
-  height: clamp(280px, 40vw, 350px);
+  height: clamp(280px, 40vw, 350px); /* 데스크톱 기본값 */
   object-fit:cover;
   border-radius:22px;
   box-shadow:0 8px 18px rgba(11,37,64,.08);
@@ -377,21 +376,54 @@ body{ padding-top: var(--nav-h); }
 .section.testimonials .ts__dots{ display:flex; justify-content:center; gap:10px; margin-top:16px; }
 .section.testimonials .ts__dot{ width:8px; height:8px; border-radius:999px; background:#c9d6ea; border:none; }
 .section.testimonials .ts__dot[aria-selected="true"]{ width:26px; background:var(--accent); transition: width .25s ease; }
-.section.testimonials .ts__dot .sr-only{ display:none; } /* 접근성 텍스트 강제 숨김 */
+.section.testimonials .ts__dot .sr-only{ display:none; }
 
-/* 모바일(Testimonials) */
+/* ---------- 모바일(Testimonials) : 레이아웃/높이 오버라이드 ---------- */
 @media (max-width: 980px){
-  .section.testimonials .section__body{ width:min(100%, 94vw); }
-  .section.testimonials .ts{ grid-template-columns:1fr; }
-  .section.testimonials .ts__nav{ position:absolute; top:calc(50% - 22px); z-index:2; }
-  .section.testimonials .ts__nav--prev{ left:-6px; }
-  .section.testimonials .ts__nav--next{ right:-6px; }
-  .section.testimonials .ts__grid{ grid-template-columns:1fr; }
-  .section.testimonials .ts__right{ grid-template-columns:1fr; align-items:start; }
-  .section.testimonials .ts__photo,
-  .section.testimonials .ts__miniChart{ height:auto; }
-}
+  /* 1) 좌/우를 세로로 쌓기: 카피 1번, 우측 큰 박스 2번 */
+  .section.testimonials .ts__grid{
+    grid-template-columns: 1fr;
+    gap: clamp(16px, 3vw, 20px);
+  }
 
+  /* 2) 우측 큰 박스 내부: 사진/그래프 좌우 1:1 + 동일 높이 */
+  .section.testimonials .ts__right{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    align-items: stretch;              /* 두 칸 동일 높이 */
+  }
+
+  /* 래퍼를 flex로 만들어 내부가 높이를 꽉 채우도록 */
+  .section.testimonials .ts__photoWrap,
+  .section.testimonials .ts__chartWrap{
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+  }
+
+  /* 그래프가 높이 기준이 되도록 */
+  .section.testimonials .ts__miniChart{
+    flex:1;
+    height:100%;
+    border-radius:18px;
+    padding:14px 14px 30px;
+  }
+
+  /* 사진은 그래프 높이에 맞춰 100% 채우기 (aspect-ratio 미사용) */
+  .section.testimonials .ts__photo{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:18px;
+    aspect-ratio:auto; /* 혹시 남아있으면 무효화 */
+  }
+
+  /* 좁은 화면 라벨 보정 */
+  .section.testimonials .ts__bar span{ bottom:-24px; font-size:13px; }
+  .section.testimonials .ts__badge{ top:-10px; right:-8px; font-size:11px; }
+  .section.testimonials .ts__badge b{ font-size:14px; }
+}
 
 /* =========================================
    3) Section 3 : Promises (신청절차 3가지)
