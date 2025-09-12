@@ -727,7 +727,7 @@ body{ padding-top: var(--nav-h); }
     width: 170px;
     aspect-ratio: 1 / 1;
   }
-  .section.industries .ind__icon{ width: 120px; height: auto; }
+  .section.industries .ind__icon{ width: 100px; height: auto; }
   .section.industries .ind__name{ font-size: 18px; }
   .section.industries .ind__cap{ font-size: 16px; padding: 8px 12px; }
 }
@@ -745,7 +745,7 @@ body{ padding-top: var(--nav-h); }
 
   /* 원/아이콘 크기 및 폰트 보정 */
   .section.industries .ind__circle{ width: 150px; }
-  .section.industries .ind__icon{ width: 76px; }
+  .section.industries .ind__icon{ width: 100px; }
   .section.industries .ind__name{ font-size: 19px; }
   .section.industries .ind__cap{ font-size: 17px; padding: 9px 12px; }
 
