@@ -913,56 +913,38 @@
   const dots    = Array.from(root.querySelectorAll('.ts__dot'));
 
   let index = 0;
-  const DURATION = 5500; // 자동 재생 간격(ms)
+  const DURATION = 5500;
   let timer = null;
   let isPaused = false;
 
-  /* ───────────── 그래프 애니메이션 준비 ───────────── */
-  // 각 슬라이드의 막대 최종 높이를 읽어 저장하고, 시작 높이는 0으로 초기화
-  slides.forEach(slide => {
-    slide.querySelectorAll('.ts__miniChart .ts__bar').forEach(bar => {
-      const h = parseFloat(getComputedStyle(bar).height) || 0; // CSS에 정의된 최종 px
-      bar.dataset.h = h;            // 목표 높이를 데이터로 보관
-      bar.style.height = '0px';     // 시작은 0에서
-    });
-  });
-
-  // 모든 슬라이드 막대를 0으로 리셋
-  function resetAllBars(){
+  /* ========== 그래프 애니메이션: scaleY만 사용 (컨테이너 고정) ========== */
+  // 시작 상태: 모두 scaleY(0)
+  function primeBars() {
     slides.forEach(slide => {
       slide.querySelectorAll('.ts__miniChart .ts__bar').forEach(bar => {
-        bar.style.height = '0px';
+        bar.style.transform = 'scaleY(0)';
       });
     });
   }
 
-  // 특정 슬라이드의 막대를 0 → 목표(px)로 채우기 (stagger 효과 포함)
+  // 현재 슬라이드 막대만 0 -> 1로 (순차 지연)
   function animateBarsFor(i){
     const cur = slides[i];
     if(!cur) return;
-
-    // 필요 시: 한 번만 채우고 재방문 시 유지하고 싶으면 아래 두 줄의 주석을 해제
-    // if (cur.classList.contains('chart-done')) return;
-    // cur.classList.add('chart-done');
-
-    resetAllBars();
-
     const bars = Array.from(cur.querySelectorAll('.ts__miniChart .ts__bar'));
     bars.forEach((bar, idx) => {
-      const target = bar.dataset.h || 0;
-      setTimeout(() => {
-        bar.style.height = target + 'px';
-      }, idx * 140); // 막대별 약간의 지연
+      // 리셋(다른 슬라이드 포함)
+      primeBars();
+      // 지연 후 채우기
+      setTimeout(() => { bar.style.transform = 'scaleY(1)'; }, idx * 140);
     });
   }
 
-  /* ───────────── 슬라이더 기본 동작 ───────────── */
+  /* ========== 슬라이더 ========== */
   function goTo(i) {
     index = (i + slides.length) % slides.length;
     track.style.transform = `translate3d(${-index * 100}%,0,0)`;
     dots.forEach((d, di) => d.setAttribute('aria-selected', di === index ? 'true' : 'false'));
-
-    // 슬라이드가 바뀔 때마다 해당 슬라이드의 그래프 채우기
     animateBarsFor(index);
   }
   function next(){ goTo(index + 1); }
@@ -988,15 +970,14 @@
   let sx = 0, dx = 0;
   root.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; dx = 0; }, {passive:true});
   root.addEventListener('touchmove',  (e) => { dx = e.touches[0].clientX - sx; }, {passive:true});
-  root.addEventListener('touchend',   ()  => {
-    if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); start(); }
-  });
+  root.addEventListener('touchend',   ()  => { if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); start(); } });
 
-  // 초기 진입: 섹션이 뷰포트에 들어오면 첫 슬라이드 그래프만 최초 1회 채우기
+  // 초기 진입 시 1회 세팅
   const io = new IntersectionObserver((entries) => {
     if (entries.some(e => e.isIntersecting)) {
-      goTo(0);   // transform + dots + 그래프 애니메이션
-      start();   // 자동 재생 시작
+      primeBars();  // 모두 0으로
+      goTo(0);      // 슬라이드 표시 + 현재 슬라이드만 채우기
+      start();
       io.disconnect();
     }
   }, {threshold: 0.2});
@@ -1004,7 +985,8 @@
 })();
 </script>
 
-<!--섹션4. 카운트 JS-->
+
+<!--섹션4. JS, 카운트 -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const nums = document.querySelectorAll(".success__num");
