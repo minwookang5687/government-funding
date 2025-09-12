@@ -708,31 +708,43 @@ body{ padding-top: var(--nav-h); }
 }
 
 /* 반응형 */
+/* 태블릿~작은 PC : 2열 */
 @media (max-width: 1024px){
-  /* 태블릿~작은 화면: 2열 */
-  .ind__grid{ 
-    grid-template-columns: repeat(2, minmax(180px, 1fr)); 
+  .ind__grid{
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+    gap: 20px;
   }
 }
 
-/* 모바일: 2열 유지 */
+/* 모바일 (<=560px) : 2열 유지 */
 @media (max-width: 560px){
-  .section.industries .section__body{ width: min(100%, 94vw); }
+  .section.industries .section__body{
+    width: min(100%, 94vw);
+  }
 
+  /* ★ 핵심: 항상 2열 */
   .ind__grid{
-    /* ← 기존 1열 설정을 없애고 2열 고정 */
     grid-template-columns: repeat(2, minmax(140px, 1fr));
     gap: 16px;
+    place-items: center; /* 가운데 정렬 */
   }
 
-  /* 원 카드가 너무 작아지지 않게 폭을 칸 너비에 맞춰 자동으로 */
-  .ind__circle{
-    width: 100%;
-    max-width: 168px;        /* 필요시 조절 */
+  /* 카드 크기/폰트 보정 */
+  .ind__circle{ 
+    width: 150px;          /* 원 크기 조정 */
     aspect-ratio: 1 / 1;
   }
-
-  .ind__texts{ margin-top: 8px; }
+  .ind__icon{ 
+    width: 76px; 
+    height: auto; 
+  }
+  .ind__name{ 
+    font-size: 18px; 
+  }
+  .ind__cap{
+    font-size: 16px;
+    padding: 8px 12px;
+  }
 }
 
 /* ====================================================== */
