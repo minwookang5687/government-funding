@@ -336,7 +336,7 @@ body{ padding-top: var(--nav-h); }
   display:block;
 }
 
-/* ✅ 그래프 컨테이너: 고정 높이 + 라벨이 잘리지 않도록 overflow:visible */
+/* ✅ 그래프 컨테이너: 고정 높이 + 라벨 안잘림 */
 .section.testimonials .ts__miniChart{
   /* 그래프 박스의 ‘틀’ 높이 (모바일~PC) */
   --ts-chart-h: clamp(240px, 36vw, 330px);
@@ -350,7 +350,7 @@ body{ padding-top: var(--nav-h); }
   align-items:flex-end;
   justify-content:center;
   gap:28px;
-  /* overflow:hidden;  ← 제거! 라벨이 잘리지 않도록 */
+  /* overflow:hidden;  ← 제거(라벨/배지 표시) */
   box-shadow:0 8px 18px rgba(11,37,64,.06);
   background:
     repeating-linear-gradient(
@@ -372,19 +372,19 @@ body{ padding-top: var(--nav-h); }
   align-items:flex-end;
   justify-content:center;
 
-  /* ✅ JS가 넣는 커스텀 프로퍼티를 높이로 사용 (Safari 안전 calc) */
+  /* ✅ JS가 넣는 커스텀 프로퍼티를 높이로 사용 */
   height: var(--bar-h, 0px);
   max-height: calc( (var(--ts-chart-h, 320px)) - 54px );
   transition: height .9s cubic-bezier(.22,.61,.36,1);
   will-change: height;
 }
 
-/* 라벨(축 텍스트) — 컨테이너 밖으로 자연스럽게 보이도록 */
+/* 라벨(축 텍스트) */
 .section.testimonials .ts__bar span{
   position:absolute;
   left:50%;
   transform: translateX(-50%);
-  bottom:-26px;         /* 약간 덜 눌리게 */
+  bottom:-26px;
   font-size:14px;
   color:#233043;
   line-height:1;
@@ -397,7 +397,7 @@ body{ padding-top: var(--nav-h); }
   background: linear-gradient(to top, var(--accent), #5da1ff);
 }
 
-/* 배지(상단 말풍선) 위치 보정 */
+/* 배지(상단 말풍선) */
 .section.testimonials .ts__badge{
   position:absolute;
   top:-12px;
@@ -413,11 +413,38 @@ body{ padding-top: var(--nav-h); }
 }
 .section.testimonials .ts__badge b{ color:var(--accent); font-size:15px; }
 
+/* ── 페이지 도트(본문 폭에 맞춰 중앙) ── */
+.section.testimonials .ts__dots{
+  width: min(1200px, 92vw);
+  margin: 16px auto 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.section.testimonials .ts__dot{
+  width:8px; height:8px; border-radius:999px;
+  background:#c9d6ea; border:none;
+}
+.section.testimonials .ts__dot[aria-selected="true"]{
+  width:26px; background:var(--accent);
+  transition: width .25s ease;
+}
+.section.testimonials .ts__dot .sr-only{ display:none; }
+
+/* ---------- 데스크톱 내비 버튼 복구 ---------- */
+@media (min-width: 981px){
+  .section.testimonials .ts__nav{
+    position: static;      /* 모바일 absolute 해제 */
+    top:auto; left:auto; right:auto;
+    transform:none;
+  }
+}
+
 /* ---------- 모바일(iOS/Android 공통) ---------- */
 @media (max-width: 980px){
 
   .section.testimonials .section__body{ width:min(100%, 94vw); }
-  .section.testimonials .ts{ grid-template-columns:1fr; }
+  .section.testimonials .ts{ grid-template-columns:1fr; position: relative; }
   .section.testimonials .ts__nav{ position:absolute; top:calc(50% - 22px); z-index:2; }
   .section.testimonials .ts__nav--prev{ left:-6px; }
   .section.testimonials .ts__nav--next{ right:-6px; }
@@ -447,7 +474,7 @@ body{ padding-top: var(--nav-h); }
     min-height: 0;
   }
 
-  /* 모바일에서 그래프 박스 높이 살짝 낮춤 */
+  /* 모바일에서 그래프 박스 높이 조정 */
   .section.testimonials .ts__miniChart{
     --ts-chart-h: clamp(220px, 48vw, 300px);
     padding: 14px 14px 30px;
@@ -466,6 +493,7 @@ body{ padding-top: var(--nav-h); }
   .section.testimonials .ts__badge{ top:-10px; right:-8px; font-size:11px; }
   .section.testimonials .ts__badge b{ font-size:14px; }
 }
+
 
 /* =========================================
    3) Section 3 : Promises (신청절차 3가지)
