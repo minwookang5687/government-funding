@@ -336,62 +336,86 @@ body{ padding-top: var(--nav-h); }
   display:block;
 }
 
-/* 그래프 컨테이너(고정 높이 + 넘침 방지) */
+/* ✅ 그래프 컨테이너: 고정 높이 + 라벨이 잘리지 않도록 overflow:visible */
 .section.testimonials .ts__miniChart{
-  width:100%; height:100%;
-  border-radius:22px; border:1px solid #eef3fa;
-  padding:18px 18px 36px;
-  display:flex; align-items:end; justify-content:center; gap:28px;
+  /* 그래프 박스의 ‘틀’ 높이 (모바일~PC) */
+  --ts-chart-h: clamp(240px, 36vw, 330px);
+
+  width:100%;
+  height: var(--ts-chart-h);
+  border-radius:22px;
+  border:1px solid #eef3fa;
+  padding:18px 18px 36px; /* 하단 라벨 공간 */
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:28px;
+  /* overflow:hidden;  ← 제거! 라벨이 잘리지 않도록 */
   box-shadow:0 8px 18px rgba(11,37,64,.06);
-  background: repeating-linear-gradient(
-    to top,
-    #ffffff 0px,
-    #ffffff 28px,
-    rgba(31,95,174,0.25) 29px
-  );
-  overflow:hidden;
+  background:
+    repeating-linear-gradient(
+      to top,
+      #ffffff 0px,
+      #ffffff 28px,
+      rgba(31,95,174,0.22) 29px
+    );
+  position: relative;
 }
 
-/* ── 막대: 높이는 100%, 값은 scaleY로 표현 ── */
-.section.testimonials .ts__miniChart .ts__bar{
+/* 막대 공통 */
+.section.testimonials .ts__bar{
   position:relative;
   width:56px;
-  height:100%;
+  background:#cbd5e1;
   border-radius:12px 12px 6px 6px;
-  display:flex; align-items:end; justify-content:center;
-  transform-origin: bottom;
-  transform: scaleY(0);                 /* 초기 상태 */
-  transition: transform .9s cubic-bezier(.22,.61,.36,1);
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+
+  /* ✅ JS가 넣는 커스텀 프로퍼티를 높이로 사용 (Safari 안전 calc) */
+  height: var(--bar-h, 0px);
+  max-height: calc( (var(--ts-chart-h, 320px)) - 54px );
+  transition: height .9s cubic-bezier(.22,.61,.36,1);
+  will-change: height;
 }
+
+/* 라벨(축 텍스트) — 컨테이너 밖으로 자연스럽게 보이도록 */
 .section.testimonials .ts__bar span{
-  position:absolute; bottom:-28px; font-size:14px; color:#233043;
+  position:absolute;
+  left:50%;
+  transform: translateX(-50%);
+  bottom:-26px;         /* 약간 덜 눌리게 */
+  font-size:14px;
+  color:#233043;
+  line-height:1;
+  white-space:nowrap;
 }
 
-/* 기본 목표값 (필요 시 슬라이드별로 덮어쓰기 가능) */
+/* 전/후 막대 스타일 */
 .section.testimonials .ts__bar--before{ background:#cbd5e1; }
-.section.testimonials .ts__bar--after { background:linear-gradient(to top, var(--accent), #5da1ff); }
+.section.testimonials .ts__bar--after {
+  background: linear-gradient(to top, var(--accent), #5da1ff);
+}
 
-/* 활성 슬라이드에서만 목표값으로 채우기 */
-.section.testimonials .ts__slide.is-active .ts__bar--before{ --target:.32; transform: scaleY(var(--target)); }
-.section.testimonials .ts__slide.is-active .ts__bar--after { --target:.92; transform: scaleY(var(--target)); }
-
-/* 배지 */
+/* 배지(상단 말풍선) 위치 보정 */
 .section.testimonials .ts__badge{
-  position:absolute; top:-12px; right:-10px; background:#fff; border:1px solid #e6ecf5; border-radius:10px;
-  padding:6px 10px; font-size:12px; text-align:center; color:#1b2a44; box-shadow:0 6px 14px rgba(11,37,64,.08);
+  position:absolute;
+  top:-12px;
+  right:-10px;
+  background:#fff;
+  border:1px solid #e6ecf5;
+  border-radius:10px;
+  padding:6px 10px;
+  font-size:12px;
+  text-align:center;
+  color:#1b2a44;
+  box-shadow:0 6px 14px rgba(11,37,64,.08);
 }
 .section.testimonials .ts__badge b{ color:var(--accent); font-size:15px; }
 
-/* 도트 */
-.section.testimonials .ts__dots{ display:flex; justify-content:center; gap:10px; margin-top:16px; }
-.section.testimonials .ts__dot{ width:8px; height:8px; border-radius:999px; background:#c9d6ea; border:none; }
-.section.testimonials .ts__dot[aria-selected="true"]{ width:26px; background:var(--accent); transition: width .25s ease; }
-.section.testimonials .ts__dot .sr-only{ display:none; }
-
-/* ---------- 모바일(Testimonials) : iOS/Android 공통 안정화 ---------- */
+/* ---------- 모바일(iOS/Android 공통) ---------- */
 @media (max-width: 980px){
 
-  /* 전체 2단을 1단으로: 카피 1번, 우측 큰 박스 2번 */
   .section.testimonials .section__body{ width:min(100%, 94vw); }
   .section.testimonials .ts{ grid-template-columns:1fr; }
   .section.testimonials .ts__nav{ position:absolute; top:calc(50% - 22px); z-index:2; }
@@ -405,7 +429,7 @@ body{ padding-top: var(--nav-h); }
     min-width: 0;
   }
 
-  /* 우측 큰 박스는 가로 2열 고정 */
+  /* 우측 큰 박스는 반반 2열 고정 */
   .section.testimonials .ts__right{
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -413,10 +437,8 @@ body{ padding-top: var(--nav-h); }
     align-items: stretch;
     justify-items: stretch;
     min-width: 0;
-    overflow: hidden;
   }
 
-  /* 자식 래퍼 */
   .section.testimonials .ts__photoWrap,
   .section.testimonials .ts__chartWrap{
     display: flex;
@@ -425,11 +447,9 @@ body{ padding-top: var(--nav-h); }
     min-height: 0;
   }
 
-  /* 그래프/사진 동일 행 높이 */
+  /* 모바일에서 그래프 박스 높이 살짝 낮춤 */
   .section.testimonials .ts__miniChart{
-    flex: 1;
-    height: 100%;
-    border-radius: 18px;
+    --ts-chart-h: clamp(220px, 48vw, 300px);
     padding: 14px 14px 30px;
   }
 
@@ -442,12 +462,10 @@ body{ padding-top: var(--nav-h); }
     min-width: 0;
   }
 
-  /* 라벨/배지 보정 */
-  .section.testimonials .ts__bar span{ bottom:-24px; font-size:13px; }
+  .section.testimonials .ts__bar span{ bottom:-22px; font-size:13px; }
   .section.testimonials .ts__badge{ top:-10px; right:-8px; font-size:11px; }
   .section.testimonials .ts__badge b{ font-size:14px; }
 }
-
 
 /* =========================================
    3) Section 3 : Promises (신청절차 3가지)

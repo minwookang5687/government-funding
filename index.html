@@ -903,7 +903,7 @@
 <!--섹션2. 슬라이드 JS-->
 <script>
 (() => {
-  const root  = document.querySelector('.testimonials');
+  const root = document.querySelector('.section.testimonials');
   if (!root) return;
 
   const track   = root.querySelector('.ts__track');
@@ -917,10 +917,61 @@
   let timer = null;
   let isPaused = false;
 
+  /* ───────── 그래프 높이 계산 & 적용 ───────── */
+  function usableHeight(chartEl){
+    // 그래프 컨테이너의 내부 실사용 높이(패딩 제외)
+    const cs = getComputedStyle(chartEl);
+    const pt = parseFloat(cs.paddingTop)    || 0;
+    const pb = parseFloat(cs.paddingBottom) || 0;
+    return Math.max(0, chartEl.clientHeight - pt - pb);
+  }
+
+  function setBarsForSlide(slide){
+    const chart = slide.querySelector('.ts__miniChart');
+    if (!chart) return;
+
+    const useH = usableHeight(chart);
+
+    // 목표 비율 (필요하면 조정: before 낮게, after 높게)
+    const beforeRatio = 0.32;
+    const afterRatio  = 0.92;
+
+    const beforeBar = chart.querySelector('.ts__bar--before');
+    const afterBar  = chart.querySelector('.ts__bar--after');
+
+    // (안전) 먼저 0으로 리셋 → 다음 프레임에 목표값 적용해 애니메이션 유도
+    if (beforeBar) beforeBar.style.setProperty('--bar-h', '0px');
+    if (afterBar)  afterBar.style.setProperty('--bar-h',  '0px');
+
+    // 레이아웃 안정 후 적용 (Safari 대비 2프레임 확보)
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (beforeBar) {
+          const h = Math.round(useH * beforeRatio);
+          beforeBar.style.setProperty('--bar-h', h + 'px');
+        }
+        if (afterBar) {
+          const h = Math.round(useH * afterRatio);
+          afterBar.style.setProperty('--bar-h', h + 'px');
+        }
+      });
+    });
+  }
+
+  function resetBars(slide){
+    // 비활성화 시 0으로 내려서 다음에 다시 올라가도록
+    slide.querySelectorAll('.ts__bar').forEach(b => {
+      b.style.setProperty('--bar-h', '0px');
+    });
+  }
+
   /* ───────── 슬라이더 기본 동작 ───────── */
   function activate(i){
-    slides.forEach(s => s.classList.remove('is-active'));
-    slides[i]?.classList.add('is-active'); // ← 활성 슬라이드에서만 막대가 scaleY(목표)로 채워짐
+    slides.forEach((s, si) => {
+      s.classList.toggle('is-active', si === i);
+      if (si === i) setBarsForSlide(s);
+      else          resetBars(s);
+    });
   }
 
   function goTo(i) {
@@ -965,9 +1016,19 @@
     }
   }, {threshold: 0.2});
   io.observe(root);
+
+  // 리사이즈/회전 시 현재 슬라이드 그래프 재계산
+  let resizeRaf = 0;
+  function onResize(){
+    cancelAnimationFrame(resizeRaf);
+    resizeRaf = requestAnimationFrame(() => {
+      setBarsForSlide(slides[index]);
+    });
+  }
+  window.addEventListener('resize', onResize);
+  window.addEventListener('orientationchange', onResize);
 })();
 </script>
-
 
 <!--섹션4. JS, 카운트 -->
 <script>
