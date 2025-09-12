@@ -193,9 +193,6 @@ body{ padding-top: var(--nav-h); }
 /* =========================================
    2) Section 2 : Testimonials (사용자 후기)
    ========================================= */
-/* =========================================
-   2) Section 2 : Testimonials (사용자 후기)
-   ========================================= */
 .section.testimonials{
   padding-block: clamp(48px, 6vw, 88px);
   background: var(--bg-start); /* 섹션2 배경 */
@@ -378,52 +375,57 @@ body{ padding-top: var(--nav-h); }
 .section.testimonials .ts__dot[aria-selected="true"]{ width:26px; background:var(--accent); transition: width .25s ease; }
 .section.testimonials .ts__dot .sr-only{ display:none; }
 
-/* ---------- 모바일(Testimonials) : 레이아웃/높이 오버라이드 ---------- */
+/* ---------- 모바일(Testimonials) : 확정 오버라이드 ---------- */
 @media (max-width: 980px){
-  /* 1) 좌/우를 세로로 쌓기: 카피 1번, 우측 큰 박스 2번 */
+
+  /* 1) 좌/우 2단 전체를 세로로 쌓기: 카피 1번, 우측 큰 박스 2번 */
   .section.testimonials .ts__grid{
+    display: grid;
     grid-template-columns: 1fr;
     gap: clamp(16px, 3vw, 20px);
   }
 
-  /* 2) 우측 큰 박스 내부: 사진/그래프 좌우 1:1 + 동일 높이 */
+  /* 2) 우측 큰 박스 내부는 '반드시' 2열 가로 배치 유지 */
   .section.testimonials .ts__right{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: grid !important;                /* 혹시 남아있는 flex/block 덮어쓰기 */
+    grid-auto-flow: column;                  /* 가로 흐름으로 강제 */
+    grid-template-columns: 1fr 1fr !important;
     gap: 12px;
-    align-items: stretch;              /* 두 칸 동일 높이 */
+    align-items: stretch;                    /* 두 칸 높이 동일 */
+    min-width: 0;                             /* 콘텐츠 넘침 방지 */
   }
 
-  /* 래퍼를 flex로 만들어 내부가 높이를 꽉 채우도록 */
+  /* 3) 자식 래퍼 기본값 – 넘침 방지 및 높이 채우기 */
   .section.testimonials .ts__photoWrap,
   .section.testimonials .ts__chartWrap{
-    display:flex;
-    flex-direction:column;
-    min-height:0;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
   }
 
-  /* 그래프가 높이 기준이 되도록 */
+  /* 4) 그래프가 행 높이를 결정 → 사진이 그 높이에 맞춤 */
   .section.testimonials .ts__miniChart{
-    flex:1;
-    height:100%;
-    border-radius:18px;
-    padding:14px 14px 30px;
+    flex: 1;
+    height: 100%;
+    border-radius: 18px;
+    padding: 14px 14px 30px;
   }
-
-  /* 사진은 그래프 높이에 맞춰 100% 채우기 (aspect-ratio 미사용) */
   .section.testimonials .ts__photo{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    border-radius:18px;
-    aspect-ratio:auto; /* 혹시 남아있으면 무효화 */
+    width: 100%;
+    height: 100%;            /* 그래프 높이에 맞춤 (aspect-ratio 미사용) */
+    object-fit: cover;
+    border-radius: 18px;
+    aspect-ratio: auto;      /* 혹시 남아있다면 무효화 */
+    min-width: 0;            /* grid overflow 방지 */
   }
 
-  /* 좁은 화면 라벨 보정 */
+  /* (선택) 라벨 크기/간격 소폭 보정 */
   .section.testimonials .ts__bar span{ bottom:-24px; font-size:13px; }
   .section.testimonials .ts__badge{ top:-10px; right:-8px; font-size:11px; }
   .section.testimonials .ts__badge b{ font-size:14px; }
 }
+
 
 /* =========================================
    3) Section 3 : Promises (신청절차 3가지)
