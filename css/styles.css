@@ -707,44 +707,51 @@ body{ padding-top: var(--nav-h); }
   box-shadow:0 12px 24px rgba(11,37,64,.16);
 }
 
-/* 반응형 */
-/* 태블릿~작은 PC : 2열 */
+/* =============================
+   Section 5 · Industries (업종)
+   모바일 전용 최종본 (iOS/Android OK)
+   - 이 블록을 '섹션5 모바일 파트'의 맨 끝에 붙여넣기
+   ============================= */
+
+/* 태블릿 이하: 2열 */
 @media (max-width: 1024px){
-  .ind__grid{
-    grid-template-columns: repeat(2, minmax(180px, 1fr));
-    gap: 20px;
-  }
-}
-
-/* 모바일 (<=560px) : 2열 유지 */
-@media (max-width: 560px){
-  .section.industries .section__body{
-    width: min(100%, 94vw);
+  .section.industries .ind__grid{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(150px, 1fr)) !important;
+    gap: 18px !important;
+    place-items: center;
   }
 
-  /* ★ 핵심: 항상 2열 */
-  .ind__grid{
-    grid-template-columns: repeat(2, minmax(140px, 1fr));
-    gap: 16px;
-    place-items: center; /* 가운데 정렬 */
-  }
-
-  /* 카드 크기/폰트 보정 */
-  .ind__circle{ 
-    width: 150px;          /* 원 크기 조정 */
+  /* 카드/아이콘 크기 조금 줄여 두 칸이 항상 들어가도록 */
+  .section.industries .ind__circle{ 
+    width: 170px;
     aspect-ratio: 1 / 1;
   }
-  .ind__icon{ 
-    width: 76px; 
-    height: auto; 
+  .section.industries .ind__icon{ width: 84px; height: auto; }
+  .section.industries .ind__name{ font-size: 18px; }
+  .section.industries .ind__cap{ font-size: 16px; padding: 8px 12px; }
+}
+
+/* 작은 모바일: 2열 유지 + 글자/간격 조금 더 키움 */
+@media (max-width: 560px){
+  .section.industries .section__body{ width: min(100%, 94vw); }
+
+  /* ★ 핵심: 어떤 이전 규칙보다 강하게 2열 고정 */
+  .section.industries .ind__grid{
+    grid-template-columns: repeat(2, minmax(140px, 1fr)) !important;
+    gap: 16px !important;
+    grid-auto-flow: row; /* iOS 사파리 레이아웃 안정화 */
   }
-  .ind__name{ 
-    font-size: 18px; 
-  }
-  .ind__cap{
-    font-size: 16px;
-    padding: 8px 12px;
-  }
+
+  /* 원/아이콘 크기 및 폰트 보정 */
+  .section.industries .ind__circle{ width: 150px; }
+  .section.industries .ind__icon{ width: 76px; }
+  .section.industries .ind__name{ font-size: 19px; }
+  .section.industries .ind__cap{ font-size: 17px; padding: 9px 12px; }
+
+  /* 섹션 타이틀/설명 폰트도 모바일에서 약간 키우기 */
+  .section.industries .section__title{ font-size: clamp(26px, 6.2vw, 34px) !important; }
+  .section.industries .section__desc{ font-size: clamp(15px, 4.2vw, 18px) !important; }
 }
 
 /* ====================================================== */
