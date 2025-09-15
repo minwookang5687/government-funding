@@ -146,7 +146,7 @@ body{ padding-top: var(--nav-h); }
   font-size:clamp(36px,4.5vw,64px);
   line-height:1.05; letter-spacing:-.01em; color:var(--brand); font-weight:900;
 }
-.hero .lead{ color:var(--muted); font-size:clamp(16px,1.6vw,18px); line-height:1.7; margin:10px 0 18px; }
+.hero .lead{ color:var(--muted); font-size:clamp(16px,1.6vw,18px); line-height:1.7; margin:10px 0 18px; font-weight:400;}
 
 .hero .bullets{ display:grid; gap:10px; margin:18px 0 26px; }
 .hero .bullet{
