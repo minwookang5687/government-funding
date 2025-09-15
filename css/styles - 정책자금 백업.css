@@ -848,10 +848,21 @@ body{ padding-top: var(--nav-h); }
 
 /* 헤더 */
 .leadform__wrap{ width:min(1100px, 92vw); margin-inline:auto; }
-.leadform__count{ margin:0 0 8px; font-size:clamp(14px,1.4vw,18px); opacity:.9; }
-.leadform__count strong{ font-weight:900; color:#74ffb4; }
-.leadform__title{ margin:4px 0 10px; font-weight:900; font-size:clamp(26px,3.8vw,40px); letter-spacing:-.01em; }
-.leadform__desc{ margin:0 0 10px; opacity:.9; line-height:1.65; font-size:clamp(14px,1.6vw,18px); }
+.leadform__count{
+  margin:0 0 8px; font-size:clamp(14px,1.4vw,18px); opacity:.9;
+}
+.leadform__count strong{
+  font-weight:900; color:#74ffb4; /* 연두 포인트 */
+}
+.leadform__title{
+  margin:4px 0 10px; font-weight:900;
+  font-size:clamp(26px,3.8vw,40px); letter-spacing:-.01em;
+}
+.leadform__desc{
+  margin:0 0 10px; opacity:.9; line-height:1.65;
+  font-size:clamp(14px,1.6vw,18px);
+}
+.leadform__tel{ margin:2px 0 18px; font-size:clamp(15px,1.6vw,18px); }
 
 /* 카드형 폼 */
 .leadform__card{
@@ -868,7 +879,9 @@ body{ padding-top: var(--nav-h); }
 .lf__field{ display:flex; flex-direction:column; text-align:left; }
 .lf__field--full{ grid-column:1 / -1; }
 
-.lf__label{ font-size:13px; color:#4b5a6b; margin:0 0 6px; font-weight:700; }
+.lf__label{
+  font-size:13px; color:#4b5a6b; margin:0 0 6px; font-weight:700;
+}
 
 /* input/select/textarea 공통 */
 .lf__input, .lf__select, .lf__textarea{
@@ -879,7 +892,6 @@ body{ padding-top: var(--nav-h); }
 .lf__textarea{ resize:vertical; min-height:110px; }
 .lf__input::placeholder, .lf__textarea::placeholder{ color:#9aa7b6; }
 
-/* 셀렉트 드롭다운 화살표 */
 .lf__select{
   appearance:none;
   background-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5' stroke='%23163c87' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -899,13 +911,13 @@ body{ padding-top: var(--nav-h); }
 .lf__agree{ display:flex; align-items:center; gap:10px; }
 .lf__check{ display:flex; gap:8px; align-items:center; font-size:14px; color:#334; }
 .lf__check input{ width:18px; height:18px; }
-.lf__policy{ color:#274c9b; text-decoration:underline; }
+.lf__policy{ color:var(--chip-ink,#274c9b); text-decoration:underline; }
 
 /* 버튼 */
 .lf__submit{
   appearance:none; border:0; border-radius:12px;
   padding:14px 18px; font-weight:900;
-  background:#0b5bd3;
+  background: var(--accent, #0b5bd3);
   color:#fff; cursor:pointer; transition: transform .06s ease, box-shadow .15s ease, background .15s ease;
   box-shadow:0 8px 20px rgba(11,91,211,.25);
 }
@@ -917,11 +929,6 @@ body{ padding-top: var(--nav-h); }
   .lf__grid{ grid-template-columns:1fr; }
 }
 
-/* 네비게이션/앵커 이동 부드럽게 (선택) */
-html{ scroll-behavior:smooth; }
-.hero, .section{ scroll-margin-top: calc(var(--nav-h, 72px) + 8px); }
-
-
 /* ===================== */
 /* 네비게이션(메뉴) */
 /* ===================== */
@@ -931,6 +938,7 @@ html{ scroll-behavior:smooth; }
 
 /* 고정 네비게이션에 가리지 않도록 여백 보정 */
 .hero, .section{ scroll-margin-top: calc(var(--nav-h, 72px) + 8px); }
+
 
 
 /* ===================== */
@@ -1043,3 +1051,137 @@ input[type="number"]::-webkit-inner-spin-button {
   opacity: 1;
   transition: 0.5s;
 }
+
+/* ===================== */
+/* 입력폼 CSS */
+/* ===================== */
+
+.form-box {
+	float:left;
+	width:100%;
+    margin:0 auto;
+    padding: 40px 0 0;
+}
+.form-top-title {font-size: 16px; font-weight: 600;  background-size: 16px; text-indent: 20px; margin-bottom: 10px;}
+.form-box:after {clear:both;}
+.form-title {
+	display:block; position:relative; float:left;
+	width:100%; width:100%; padding:0;
+	color:#FFF; text-align:center;
+}
+.form-title img {width:100%;}
+.form-title h4 {margin-top:0; margin-bottom:10px; font-size:32px; font-weight:800;}
+.form-title span {
+	display:inline-block;
+	width:100%; margin-bottom:0px;
+	font-size:20px; font-weight:400; line-height:1;
+}
+.form-title span em {font-weight:700;}
+.form-title p{
+	display:inline-block;
+	margin-bottom:0; margin-bottom:10px;
+	font-size:18px; line-height:1;
+}
+
+.form-box-inner {float:left; width:100%; margin:0 auto;}
+
+.form-box-tb-out {
+    overflow:hidden;
+    border-top:2px solid #005a2e;
+}
+.form-box-tb {width:100%; margin:0 auto; color:#444;}
+.form-box-tb th {
+    width: 80px;
+    max-width: 100px;
+    padding: 4px 6px;
+    font-weight: 500;
+    text-align: left;
+    font-size: 14px;
+    vertical-align: middle;
+    border-bottom: 1px solid #ccc;
+    background: #f7f7f7;
+}
+.form-box-tb th .fa {margin-right: 4px; font-size: 16px; vertical-align: middle;}
+.form-box-tb td {padding: 4px 6px;border-bottom: 1px solid #ccc;}
+
+.form-box-tb input[type="text"], textarea, select {
+    padding: 6px 12px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #eaeaea;
+    background: none;
+    height: 35px;
+}
+.form-box-tb select {padding-left: 3px;}
+.form-box-tb input[type="text"]:focus,
+.form-box-tb input[type="tel"]:focus,
+.form-box-tb select:focus {
+	border-style:solid; border-color:#66afe9; outline:0;
+	transition:border-color ease-in-out .15s;
+}
+.form-box-tb textarea:focus {
+	border-width:1px; border-style:solid; border-color:#66afe9; outline:0;
+}
+.form-box-tb input[name="M_name"] {width:100%;}
+
+.form-box-tb select[name="M_phone1"],
+.form-box-tb input[name="M_phone2"],
+.form-box-tb input[name="M_phone3"] {
+	float:left;
+	width:calc(100% / 3 - 3px); height:42px; margin-right:4px; overflow:hidden;
+    padding-left: 3px; padding-right: 3px;text-align: center;
+	border-width:1px; border-style:solid; border-color: #eaeaea;background:none;
+}
+.form-box-tb input[name="M_phone3"] {margin-right:0;}
+.f-icon {margin-right:10px; vertical-align:middle;}
+
+textarea.form-info {
+	width:100%; min-height:86px; margin:0px;vertical-align: middle;
+	border:1px solid #eaeaea;
+	font-size:14px; line-height:1.4;
+	resize:none;
+}
+textarea.form-info.blue-box {border-color:#d5d5d5;}
+textarea.form-info.blue-box:focus {
+border-width:1px; border-style:solid; border-color:#66afe9; outline:0;
+transition:border-color ease-in-out .15s;
+}
+textarea.form-data {
+	width:100%; min-height:86px;
+	border-width:1px; border-style:solid; border-color:#eaeaea;
+	font-size:14px; line-height:1.4;
+	resize:none;
+}
+.select-box {
+    border-width: 1px;
+}
+span.checkbox-span {
+    margin-bottom:0px!important;display: inline-block;
+}
+.form-info-agree span {
+    font-weight: 600;
+    margin-left: 7px;display: inline-block;
+}
+.txt-center {
+    display: inline-block;
+    text-align: center;
+}
+.form-agree-box {margin-bottom: 10px;}
+textarea.form-data:focus {border-color:#66afe9;}
+p.form-info-agree {padding:5px 0;text-align: center;}
+
+td.copyright {text-align:right;}
+td.copyright span.c-txt {color:#333;}
+
+.submit-btn {
+    border:0px;
+	display:block;
+	width:100%; height:40px; margin:0 auto; margin-top:5px; margin-bottom: 10px; background:#0e3b64;
+	color:#fff!important; font-weight:500; text-align:center; line-height:40px; font-size: 16px;
+}
+
+/*
+p.form-info-agree label {margin-left:5px; color:#333; font-size:12px; cursor:pointer;}
+p.form-info-agree strong {color:#333; font-size:13px;}
+p.form-info-agree input[type="radio"] {vertical-align:middle; cursor:pointer;}
+*/

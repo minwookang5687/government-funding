@@ -1,0 +1,300 @@
+<head>
+  <!-- 외부 CSS -->
+  <link rel="stylesheet" href="./css/styles.css">
+  <link href="css/ionicons.min.css" rel="stylesheet" /> <!--개인정보 팝업 닫기버튼-->
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+</head>
+<body>
+
+<!--New스타일 입력폼, 배경에 이미지 삽입 (09.15)-->
+<section class="section leadform" id="contact" aria-labelledby="leadform-title">
+  <div class="leadform__bg" aria-hidden="true"></div>
+  <div class="leadform__wrap">
+    <header class="leadform__head">
+      <p class="leadform__count" style="font-size: 18px;">오늘 최대한도&최저금리<br>무료진단 받으신 대표님
+        <strong id="today-count">0</strong>명
+      </p>
+      <h2 id="leadform-title" class="leadform__title">정책자금 솔루션 무료상담 신청</h2>
+      <p class="leadform__desc" style="font-size: 18px;">
+        대표님 회사에 큰 도움이 될수있게<br>
+        언제나 <span style="color: #ffe600;"><b>최대한도, 최저금리</b></span>를 목표로 합니다.<br>
+        <span style="color: #ffe600;"><b>97%의 높은 승인율</b></span>을 자랑하는 전문 컨설턴트의<br>
+        정책자금 솔루션 맞춤상담으로 <br>사업 자금을 확실하게 마련하세요. 
+      </p><br>
+    </header>
+
+    <form action="" id="form_e11" method="POST" target="hidden_iframe11"
+          onsubmit="setTimeout(hoa, 1500); submitted=true;" class="leadform__card" novalidate>
+      <input type="hidden" name="entry.1767017674" value="유입매체">
+
+      <div class="lf__grid">
+        <!-- 1. 이름 -->
+        <div class="lf__field">
+          <label for="name" class="lf__label">이름</label>
+          <input
+            type="text"
+            id="name"
+            name="entry.114372548"
+            class="lf__input"
+            placeholder="이름"
+            maxlength="4"
+            autocomplete="name"
+            required
+          >
+        </div>
+
+        <!-- 2. 연락처 -->
+        <div class="lf__field">
+          <label for="phone" class="lf__label">연락처</label>
+          <input
+            type="tel"
+            id="phone"
+            name="entry.2053141744"
+            class="lf__input"
+            inputmode="numeric"
+            placeholder="숫자만 입력 (예: 01012345678)"
+            maxlength="11"
+            autocomplete="tel"
+            required
+          >
+        </div>
+
+        <!-- 3. 사업자 상호 -->
+        <div class="lf__field">
+          <label for="bizname" class="lf__label">사업자 상호</label>
+          <input
+            type="text"
+            id="bizname"
+            name="entry.2013305819"
+            class="lf__input"
+            placeholder="상호명 입력"
+            autocomplete="organization"
+            required
+          >
+        </div>
+
+        <!-- 4. 업종 -->
+        <div class="lf__field">
+          <label for="industry" class="lf__label">업종</label>
+          <select id="industry" name="entry.855034677" class="lf__select" required>
+            <option value="" selected disabled>업종을 선택해주세요</option>
+            <option>도소매업</option>
+            <option>제조업</option>
+            <option>통신판매업</option>
+            <option>서비스업</option>
+            <option>음식점업</option>
+            <option>IT개발업</option>
+            <option>기타</option>
+          </select>
+        </div>
+
+        <!-- 5. 지역 -->
+        <div class="lf__field">
+          <label for="region" class="lf__label">지역</label>
+          <select id="region" name="entry.1446743340" class="lf__select" required>
+            <option value="" selected disabled>지역을 선택해주세요</option>
+            <option value="서울">서울</option>
+            <option value="경기도">경기도</option>
+            <option value="인천">인천</option>
+          </select>
+        </div>
+
+        <!-- 6. 연매출 -->
+        <div class="lf__field">
+          <label for="revenue" class="lf__label">연매출</label>
+          <select id="revenue" name="entry.853049962" class="lf__select" required>
+            <option value="" selected disabled>연매출을 선택해주세요</option>
+            <option>3천만원 미만</option>
+            <option>1억미만</option>
+            <option>1~3억</option>
+            <option>3~5억</option>
+            <option>5~10억</option>
+            <option>10~20억</option>
+            <option>30~50억</option>
+            <option>50억이상</option>
+          </select>
+        </div>
+
+        <!-- 7. 필요자금 -->
+        <div class="lf__field">
+          <label for="fund" class="lf__label">필요자금</label>
+          <select id="fund" name="entry.1570139881" class="lf__select" required>
+            <option value="" selected disabled>필요자금을 선택해주세요</option>
+            <option>1~3천만원</option>
+            <option>3~6천만원</option>
+            <option>6~9천만원</option>
+            <option>1~2억</option>
+            <option>2~3억</option>
+            <option>3~4억</option>
+            <option>4~7억</option>
+            <option>7~10억</option>
+            <option>10억이상</option>
+          </select>
+        </div>
+
+        <!-- 8. 연체/국세 체납여부 -->
+        <div class="lf__field">
+          <label for="arrears" class="lf__label">연체/국세 체납여부</label>
+          <select id="arrears" name="entry.425300914" class="lf__select" required>
+            <option value="" selected disabled>선택해주세요</option>
+            <option>O</option>
+            <option>X</option>
+          </select>
+        </div>
+
+        <!-- 동의 & 약관 -->
+        <div class="lf__agree lf__field--full">
+          <label class="lf__check" for="agree11">
+            <input
+              type="checkbox"
+              id="agree11"
+              name="agree11"
+              value="개인정보보호정책 동의"
+              checked
+              required
+            >
+            <span>개인정보처리방침에 동의합니다.</span>
+          </label>
+          <!-- 반드시 유지 -->
+          <span class="privacyBtn" style="color:#000;font-weight:400;font-size:13px;margin-top:-3px;"
+                onclick="privacyPopUp()">[자세히 보기]</span>
+        </div>
+
+        <!-- 제출 버튼 (id, 클래스 유지) -->
+        <button type="submit" id="send_message" class="lf__submit lf__field--full" disabled>
+          무료지원하기
+        </button>
+      </div>
+      <!-- 반드시 유지: 제출 흐름용 iframe -->
+      <script type="text/javascript">var submitted = false;</script>
+      <iframe name="hidden_iframe11" id="hidden_iframe11" style="display:none;"></iframe>
+      <iframe name="hidden_iframe12" id="hidden_iframe12" style="display:none;"></iframe>
+    </form>
+  </div>
+</section>
+
+<!--개인정보처리방침-->
+<div id="privacy">
+        <div id="privacyContent">
+            <div class="titWrap">
+                    <span>개인정보취급방침</span>
+                <i style="margin-top:-14px !important" class="ion-close-circled closeBtn"></i>
+            </div>
+            <div style="line-height:1.2" class="conWrap">
+                개인정보의 수집 및 이용 동의(필수)<br><br>
+
+                1. 수집하는 개인정보의 항목 및 수집목적<br><br>
+
+                (1) 개인정보 수집목적<br>
+                리코코퍼레이션은 이용자의 개인정보를 다음과 같은 목적으로 수집∙이용합니다.<br>
+                가. 회원으로 가입한 이용자를 식별하고 가입의사 및 나이 확인, 불량회원의 부정한 이용을 방지하기 위하여 사용합니다.<br>
+                나. 이용자에게 리코코퍼레이션의 다양한 서비스를 제공하고 서비스 이용 과정에서 이용자의 문의사항이나 불만을 처리하고 공지사항 등을 전달하기 위해 사용합니다.<br>
+                다. 이용자와 약속한 서비스를 제공하고 유료 서비스 구매 및 이용이 이루어지는 경우 이에 따른 요금 정산을 위해 사용됩니다.<br>
+                라. 신규 서비스가 개발되거나 이벤트 행사 시 참여기회를 알리기 위한 정보 전달 및 마케팅 및 광고 등에도 사용됩니다.<br>
+                마. 이용자의 서비스 이용 기록과 접속 빈도 분석 및 서비스 이용에 대한 통계, 이를 통한 맞춤형 서비스 제공과 서비스 개선에도 사용됩니다.<br>
+                바. 회사에 마케팅을 의뢰한 제3자의 광고, 상품소개 등 관련 광고문자 발송, 이벤트 행사 및 경품/쿠폰 관련 고객문의 응대에도 사용됩니다.<br><br>
+
+                (2) 수집하는 개인정보의 항목<br>
+                회사는 회원(또는 서비스) 가입, 원활한 고객상담, 각종 서비스의 제공 등을 위해 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.<br>
+                가. 개인회원 가입시<br>
+                휴대전화번호, 이름, 이메일 주소가 수집될 수 있습니다.<br>
+                나. 광고서비스 제공 시<br>
+                이름, 휴대폰 전화번호, 이메일이 수집될 수 있습니다.<br>
+                다. 상담 서비스 이용 시<br>
+                서비스 품질 확인 및 개선을 위해 연락처 정보(발/수신 전화번호), 서비스 이용 기록(통화시간, 통화 내용 등)이 수집될 수 있습니다.<br>
+                라. 기타<br>
+                서비스 이용과정에서 아래와 같은 정보들이 자동으로 생성되어 수집될 수 있습니다.<br>
+                IP Address, 쿠키, 방문 일시, 서비스 이용 기록, 불량 이용 기록, 기기정보<br><br>
+
+                2. 개인정보 수집방법<br>
+                - 회사는 다음과 같은 방법으로 개인정보를 수집합니다.<br>
+                - 서비스 내 관련 페이지, 서면 양식, 팩스, 전화, 상담 게시판, 이메일, 이벤트 응모<br>
+                - 협력회사 및 수탁자로부터의 제공<br>
+                - 회사의 이벤트 안내 팝업 내 이용자가 직접 입력한 정보 수집<br><br>
+
+                3. 개인정보의 보유 및 이용기간<br>
+                리코코퍼레이션은 이용자의 개인정보를 회원가입을 하는 시점부터 서비스를 제공하는 기간 동안에만 제한적으로 이용하고 있습니다.<br>
+                이용자가 회원탈퇴를 요청하거나 제공한 개인정보의 수집 및 이용에 대한 동의를 철회하는 경우, 또는 수집 및 이용목적이 달성되거나 보유 및 이용기간이 종료한 경우 해당 이용자의 개인정보는 지체 없이 파기되며 다음 정보에 대해서는 아래의 사유로 일정기간 동안 저장됩니다.<br>
+                전자상거래 등에서의 소비자보호에 관한 법률, 통신비밀보호법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 등 관계법령에 따라 보존할 필요가 있는 경우 회사는 관계법령에서 정한 기간 동안 고객의 개인정보를 보유하며, 그 기간은 다음과 같습니다.<br><br>
+
+                <table style="border: 1px solid black;">
+                <tr>
+                    <th style="border: 1px solid black;">보존근거</th>
+                    <th style="border: 1px solid black;">보존대상</th>
+                    <th style="border: 1px solid black;">보존기간</th>
+                </tr>
+                <tr>
+                    <th style="border: 1px solid black;"> 전자상거래 등에서의소비자 보호에 관한 법률 </th>
+                    <th style="border: 1px solid black;"> 대금결제 및 재화 등의 공급에 관한 기록 </th>
+                    <th style="border: 1px solid black;"> 5년 </th>
+                </tr>
+                <tr>
+                    <th style="border: 1px solid black;"> 전자상거래 등에서의소비자 보호에 관한 법률 </th>
+                    <th style="border: 1px solid black;"> 소비자의 불만 또는 분쟁처리에 관한 기록 </th>
+                    <th style="border: 1px solid black;"> 3년 </th>
+                </tr>
+		        <tr>
+                    <th style="border: 1px solid black;"> 전자상거래 등에서의소비자 보호에 관한 법률 </th>
+                    <th style="border: 1px solid black;"> 표시, 광고에 관한 기록 </th>
+                    <th style="border: 1px solid black;"> 6개월 </th>
+                </tr>
+		        <tr>
+                    <th style="border: 1px solid black;"> 전자금융거래법 </th>
+                    <th style="border: 1px solid black;"> 전자금융 거래에 관한 기록 </th>
+                    <th style="border: 1px solid black;"> 5년 </th>
+                </tr>
+		        <tr>
+                    <th style="border: 1px solid black;"> 통신비밀보호법 </th>
+                    <th style="border: 1px solid black;"> 서비스 방문기록, 접속로그,접속 아이피 </th>
+                    <th style="border: 1px solid black;"> 3개월 </th>
+                </tr>
+		        <tr>
+                    <th style="border: 1px solid black;"> 정보통신망 이용촉진 및 정보보호 등에 관한 법률 </th>
+                    <th style="border: 1px solid black;"> 본인 확인에 관한 기록 </th>
+                    <th style="border: 1px solid black;"> 6개월 </th>
+                </tr>
+                </table>
+
+                <br><br>개인정보의 제3자 제공 및 위탁 동의(필수)<br>
+                1. 회사는 이용자의 개인정보를 제 1조(수집하는 개인정보의 항목 및 수집방법)에서 명시한 범위 내에서 처리하며, 이용자의 동의, 법률의 특별한 규정 등 개인정보보호법 제17조 및 제 18조에 해당하는 경우에만 개인정보를 제3자에게 제공합니다.<br><br>
+
+                2. 회사는 다음과 같이 개인정보를 제3자에게 제공하고 있습니다.<br><br>
+
+                제3자 : 대한모발건강지원,주식회사 더모락<br>
+                제공하는 개인정보항목 : 이름,연락처,지역,확인사항 등<br>
+                제공받는자의 이용목적 : 맞춤형 서비스 제공, 운영 업무 대행<br>
+                제공받는자의 보유 및 이용기간 : 참여일로부터 12개월<br><br>
+
+                3. 회사는 이용자에게 다양한 서비스를 제공하는 데에 반드시 필요한 업무 중 일부를 외부 업체로 하여금 수행하도록 개인정보의 취급 업무를 위탁합니다. 개인정보 위탁처리 기관 및 위탁업무의 내용은 다음과 같습니다.<br><br>
+
+                수탁자(업체) : 리코코퍼레이션<br>
+                위탁업무 내용 : 개인정보 수집 및 제공<br>
+                위탁처리 정보 : 이름,연락처,지역,확인사항 등<br>
+                개인정보 이용기간 : 개인정보 제공을 완료한 시점까지만<br><br>
+
+                4. 이용자는 서비스 제공 및 이용 이외의 목적으로 제3자에게 본인의 개인정보를 제공하는 것에 동의하지 않을 수 있습니다.<br>
+                5. 회사는 개인정보 제공업체에 변경이 생길 수 있습니다. 이에 대한 변경사항은 회사 인터넷 사이트를 통해 제공받는자, 이용목적, 제공하는 개인정보항목, 보유 및 이용기간에 대해 공지하고 별도의 고객동의를 득하여 업체에게 제공됩니다.<br>
+                6. 이용자는 이미 동의한 개인정보 제3자 제공에 대한 철회를 요청할 수 있으며, 요청하는 창구는 다음과 같습니다.<br><br>
+
+                개인정보관리책임자<br>
+                이름 : 김선재<br>
+                소속/직위:개인정보관리책임자<br>
+                이메일 : ricco-corporation@naver.com<br><br>
+
+                기타 개인정보침해에 대한 신고나 상담이 필요하신 경우에는 아래 기관에 문의하시기 바랍니다.<br>
+                1.개인분쟁조정위원회 (https://www.1336.or.kr/1336)<br>
+                2.정보보호마크인증위원회 (https://www.eprivacy.or.kr/02-580-0533~4)<br>
+                3.대검찰청 인터넷범죄수사센터 (02-3480-3600)<br>
+                4.경찰청 사이버테러대응센터 (https://www.ctrc.go.kr/02-392-0330)<br>
+            </div>
+        </div>
+  </div>
+
+<!--JS파일-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!--(필수)이 제이쿼리 코드 다음에 js코드가 와야함-->
+  <script src="js/validation-fund-row.js"></script>
+  <script src="js/personal.js"></script>
+  <script src="js/main.js" charset="euc-kr"></script>
+  <script src="js/wow.min.js"></script>
+
+</body>
