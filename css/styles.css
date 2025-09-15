@@ -499,87 +499,8 @@ body{ padding-top: var(--nav-h); }
   .section.testimonials .ts__badge b{ font-size:14px; }
 }
 
-
-/* =========================================
-   3) Section 3 : Promises (신청절차 3가지)
-   ========================================= */
-.section.promises{
-  position:relative; padding-block:clamp(56px, 7vw, 110px); isolation:isolate;
-}
-/* 흐릿한 배경사진(투명 오버레이) */
-.section.promises .promises__bg{
-  --bg-url: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1600&auto=format&fit=crop');
-  position:absolute; inset:0; z-index:-1;
-  background:
-    linear-gradient(to bottom, rgba(255,255,255,.9), rgba(255,255,255,.92)),
-    var(--bg-url) center/cover no-repeat;
-  filter:blur(2px); opacity:.9;
-}
-
-/* 헤더 */
-.section.promises .section__head{ text-align:center; margin-bottom:clamp(24px, 3.5vw, 42px); }
-.section.promises .section__title{
-  font-weight:900; color:var(--ink); font-size:clamp(28px, 4.2vw, 48px); letter-spacing:-.02em;
-}
-.section.promises .section__desc{
-  margin-top:10px; color:var(--muted); font-size:clamp(14px, 1.6vw, 18px);
-}
-
-/* 본문 컨테이너 */
-.section.promises .section__body{ width:min(1200px,92vw); margin-inline:auto; }
-
-/* 3열 카드 */
-.section.promises .promises__grid{
-  list-style:none; margin:0; padding:0;
-  display:grid; grid-template-columns:repeat(3, 1fr);
-  gap:clamp(16px, 2.2vw, 24px); align-items:stretch;
-}
-
-/* 카드 */
-.section.promises .promise{
-  background:#fff; border:1px solid #edf2f9; border-radius:16px;
-  padding:clamp(18px, 2.6vw, 28px) clamp(18px, 2.6vw, 28px) clamp(22px, 3vw, 32px);
-  text-align:center; box-shadow:0 10px 30px rgba(11,37,64,.08);
-  transition: transform .18s ease, box-shadow .18s ease;
-}
-.section.promises .promise:hover{
-  transform:translateY(-2px); box-shadow:0 14px 36px rgba(11,37,64,.12);
-}
-
-/* 아이콘 */
-.section.promises .promise__icon{
-  width:100px; height:100px; margin-inline:auto; margin-bottom:clamp(12px, 1.8vw, 16px);
-  display:grid; place-items:center;
-  filter: drop-shadow(0 6px 16px rgba(47,111,228,.25));
-}
-
-.section.promises .promise__icon img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;
-  display:block;
-}
-
-/* 제목/설명 */
-.section.promises .promise__title{
-  font-weight:900; font-size:clamp(18px, 2.4vw, 26px);
-  color:var(--ink); margin:6px 0 10px; letter-spacing:-.01em;
-}
-.section.promises .promise__desc{
-  color:#46566e; line-height:1.7; font-size:clamp(14px, 1.7vw, 18px);
-}
-
-/* 반응형(Promises) */
-@media (max-width: 1024px){
-  .section.promises .promises__grid{ grid-template-columns:1fr 1fr; }
-}
-@media (max-width: 640px){
-  .section.promises .promises__grid{ grid-template-columns:1fr; }
-  .section.promises .promise{ text-align:center; }
-}
-
 /* =========================
-   Section 4 : Success Rate
+   Section 3 : Success Rate(성공률)
    ========================= */
 .section.success{
   position: relative;
@@ -671,7 +592,7 @@ body{ padding-top: var(--nav-h); }
 }
 
 /* =============================
-   Section 5 · Industries (업종)
+   Section 4 · Industries (업종)
    ============================= */
 .section.industries{
   padding-block: clamp(56px, 7vw, 96px);
@@ -779,7 +700,7 @@ body{ padding-top: var(--nav-h); }
 }
 
 /* =============================
-   Section 5 · Industries (업종)
+   Section 4 · Industries (업종)
    모바일 전용 최종본 (iOS/Android OK)
    - 이 블록을 '섹션5 모바일 파트'의 맨 끝에 붙여넣기
    ============================= */
@@ -823,6 +744,84 @@ body{ padding-top: var(--nav-h); }
   /* 섹션 타이틀/설명 폰트도 모바일에서 약간 키우기 */
   .section.industries .section__title{ font-size: clamp(26px, 6.2vw, 34px) !important; }
   .section.industries .section__desc{ font-size: clamp(15px, 4.2vw, 18px) !important; }
+}
+
+/* =========================================
+   3) Section 5 : Promises (신청절차 3가지)
+   ========================================= */
+.section.promises{
+  position:relative; padding-block:clamp(56px, 7vw, 110px); isolation:isolate;
+}
+/* 흐릿한 배경사진(투명 오버레이) */
+.section.promises .promises__bg{
+  --bg-url: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1600&auto=format&fit=crop');
+  position:absolute; inset:0; z-index:-1;
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.9), rgba(255,255,255,.92)),
+    var(--bg-url) center/cover no-repeat;
+  filter:blur(2px); opacity:.9;
+}
+
+/* 헤더 */
+.section.promises .section__head{ text-align:center; margin-bottom:clamp(24px, 3.5vw, 42px); }
+.section.promises .section__title{
+  font-weight:900; color:var(--ink); font-size:clamp(28px, 4.2vw, 48px); letter-spacing:-.02em;
+}
+.section.promises .section__desc{
+  margin-top:10px; color:var(--muted); font-size:clamp(14px, 1.6vw, 18px);
+}
+
+/* 본문 컨테이너 */
+.section.promises .section__body{ width:min(1200px,92vw); margin-inline:auto; }
+
+/* 3열 카드 */
+.section.promises .promises__grid{
+  list-style:none; margin:0; padding:0;
+  display:grid; grid-template-columns:repeat(3, 1fr);
+  gap:clamp(16px, 2.2vw, 24px); align-items:stretch;
+}
+
+/* 카드 */
+.section.promises .promise{
+  background:#fff; border:1px solid #edf2f9; border-radius:16px;
+  padding:clamp(18px, 2.6vw, 28px) clamp(18px, 2.6vw, 28px) clamp(22px, 3vw, 32px);
+  text-align:center; box-shadow:0 10px 30px rgba(11,37,64,.08);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.section.promises .promise:hover{
+  transform:translateY(-2px); box-shadow:0 14px 36px rgba(11,37,64,.12);
+}
+
+/* 아이콘 */
+.section.promises .promise__icon{
+  width:100px; height:100px; margin-inline:auto; margin-bottom:clamp(12px, 1.8vw, 16px);
+  display:grid; place-items:center;
+  filter: drop-shadow(0 6px 16px rgba(47,111,228,.25));
+}
+
+.section.promises .promise__icon img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  display:block;
+}
+
+/* 제목/설명 */
+.section.promises .promise__title{
+  font-weight:900; font-size:clamp(18px, 2.4vw, 26px);
+  color:var(--ink); margin:6px 0 10px; letter-spacing:-.01em;
+}
+.section.promises .promise__desc{
+  color:#46566e; line-height:1.7; font-size:clamp(14px, 1.7vw, 18px);
+}
+
+/* 반응형(Promises) */
+@media (max-width: 1024px){
+  .section.promises .promises__grid{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width: 640px){
+  .section.promises .promises__grid{ grid-template-columns:1fr; }
+  .section.promises .promise{ text-align:center; }
 }
 
 /* ====================================================== */

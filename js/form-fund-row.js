@@ -48,7 +48,6 @@ form.innerHTML = `
             inputmode="numeric"
             placeholder="숫자만 입력 (예: 01012345678)"
             maxlength="11"
-            autocomplete="tel"
             required
           >
         </div>
