@@ -8,7 +8,7 @@ form.innerHTML = `
       <p class="leadform__count" style="font-size: 18px;">오늘 최대한도&최저금리<br>무료진단 받으신 대표님
         <strong id="today-count">0</strong>명
       </p>
-      <h2 id="leadform-title" class="leadform__title">CBIC 중소기업 비즈니스 혁신센터<br>정책자금 솔루션 무료상담 신청</h2>
+      <h2 id="leadform-title" class="leadform__title">2025년 하반기<br>정책자금 컨설팅 솔루션<br>무료상담 신청</h2>
       <p class="leadform__desc" style="font-size: 18px;">
         대표님 회사에 큰 도움이 될수있게<br>
         언제나 <span style="color: #ffe600;"><b>최대한도, 최저금리</b></span>를 목표로 합니다.<br>

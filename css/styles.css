@@ -12,6 +12,7 @@
   --chip:#e9f0ff;
   --chip-ink:#274c9b;
   --ring: 0 0 0 4px rgba(11,91,211,.15);
+  --th-bg: #668fe9;
 }
 
 *{ box-sizing:border-box; }
