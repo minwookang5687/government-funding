@@ -97,11 +97,17 @@ function maxLengthCheck(object){
   }    
 }
  
- function hoa(){      // 폼 제출하고 떙큐페이지 넘기는 함수
-        alert("신청이 완료되었습니다.");
-        $(window).scrollTop(0);
-        window.location.href = './result.html';
- }
+
+ function hoa(){   // 폼 제출하고 땡큐페이지 넘기는 함수
+    alert("잠시만 기다려주세요.");
+    $(window).scrollTop(0);
+
+    // 랜덤 토큰 생성
+    var tx = Math.random().toString(36).substr(2) + Date.now().toString(36);
+
+    // 토큰을 붙여서 땡큐페이지로 이동
+    window.location.href = 'https://govfund.co.kr/result?tx=' + tx;
+}
 
  
  function site1111(){
