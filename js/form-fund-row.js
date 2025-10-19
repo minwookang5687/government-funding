@@ -5,15 +5,15 @@ form.innerHTML = `
   <div class="leadform__bg" aria-hidden="true"></div>
   <div class="leadform__wrap">
     <header class="leadform__head">
-      <p class="leadform__count" style="font-size: 18px;">오늘 최대한도&최저금리<br>무료진단 받으신 대표님
+      <p class="leadform__count" style="font-size: 18px;">오늘 자금한도&금리<br>무료진단 받으신 대표님
         <strong id="today-count">0</strong>명
       </p>
-      <h2 id="leadform-title" class="leadform__title">2025년 하반기<br>정책자금 컨설팅 솔루션<br>무료상담 신청</h2>
+      <h2 id="leadform-title" class="leadform__title">2025년 하반기<br>기업 정책금융 컨설팅<br>무료상담 신청</h2>
       <p class="leadform__desc" style="font-size: 18px;">
-        대표님 회사에 큰 도움이 될수있게<br>
-        언제나 <span style="color: #ffe600;"><b>최대한도, 최저금리</b></span>를 목표로 합니다.<br>
-        <span style="color: #ffe600;"><b>97%의 높은 승인율</b></span>을 자랑하는 전문 컨설턴트의<br>
-        정책자금 솔루션 맞춤상담으로 <br>사업 자금을 확실하게 마련하세요. 
+        오랜 경력을 가진 전문 컨설턴트가<br>
+        대표님 기업에 필요한 <span style="color: #ffe600;"><b>한도·금리 조건</b></span>을 비교 분석해<br>
+        2025년 하반기 정책 활용 방안과<br>
+        <span style="color: #ffe600;"><b>최적의 자금</b></span> 운용 전략을 제안드립니다.
       </p><br>
     </header>
 
