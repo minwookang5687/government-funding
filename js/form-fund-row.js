@@ -125,9 +125,9 @@ form.innerHTML = `
           </select>
         </div>
 
-        <!-- 8. 연체/국세 체납여부 -->
+        <!-- 8. 세금 체납/연체/결손 여부 -->
         <div class="lf__field">
-          <label for="arrears" class="lf__label">연체/국세 체납여부</label>
+          <label for="arrears" class="lf__label">세금 체납/연체/결손 여부</label>
           <select id="arrears" name="entry.425300914" class="lf__select" required>
             <option value="" selected disabled>선택해주세요</option>
             <option>O</option>
