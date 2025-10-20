@@ -5,15 +5,14 @@ form.innerHTML = `
   <div class="leadform__bg" aria-hidden="true"></div>
   <div class="leadform__wrap">
     <header class="leadform__head">
-      <p class="leadform__count" style="font-size: 18px;">오늘 자금한도&금리<br>무료진단 받으신 대표님
+      <p class="leadform__count" style="font-size: 18px;">오늘 최대한도&최저금리<br>무료진단 받으신 대표님
         <strong id="today-count">0</strong>명
       </p>
-      <h2 id="leadform-title" class="leadform__title">2025년 하반기<br>기업 정책금융 컨설팅<br>무료상담 신청</h2>
+      <h2 id="leadform-title" class="leadform__title">2025년 하반기<br>인천광역시 정책자금 컨설팅<br>무료상담 신청</h2>
       <p class="leadform__desc" style="font-size: 18px;">
         오랜 경력을 가진 전문 컨설턴트가<br>
-        대표님 기업에 필요한 <span style="color: #ffe600;"><b>한도·금리 조건</b></span>을 비교 분석해<br>
-        2025년 하반기 정책 활용 방안과<br>
-        <span style="color: #ffe600;"><b>최적의 자금</b></span> 운용 전략을 제안드립니다.
+        대표님 기업에 필요한 <span style="color: #ffe600;"><b>최대한도·최저금리 조건</b></span>을 비교 분석해<br>
+        <span style="color: #ffe600;"><b>최적의 자금승인</b></span> 전략을 제안드립니다.
       </p><br>
     </header>
 
@@ -80,7 +79,7 @@ form.innerHTML = `
           <label for="region" class="lf__label">지역</label>
           <select id="region" name="entry.1446743340" class="lf__select" required>
             <option value="" selected disabled>지역을 선택해주세요</option>
-            <option value="경기도">경기도</option>
+            <option value="인천광역시">인천광역시</option>
           </select>
         </div>
 
@@ -89,7 +88,6 @@ form.innerHTML = `
           <label for="revenue" class="lf__label">연매출</label>
           <select id="revenue" name="entry.853049962" class="lf__select" required>
             <option value="" selected disabled>연매출을 선택해주세요</option>
-            <option>5천만원 미만</option>
             <option>1억미만</option>
             <option>1~3억</option>
             <option>3~5억</option>

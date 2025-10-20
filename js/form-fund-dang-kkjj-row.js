@@ -71,7 +71,6 @@ form.innerHTML = `
           <select id="industry" name="entry.855034677" class="lf__select" required>
             <option value="" selected disabled>업종을 선택해주세요</option>
             <option>제조업</option>
-            <option>도소매업(OEM)</option>
           </select>
         </div>
 
