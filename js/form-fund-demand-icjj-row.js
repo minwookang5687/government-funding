@@ -8,7 +8,7 @@ form.innerHTML = `
       <p class="leadform__count" style="font-size: 18px;">오늘 자금한도&금리<br>무료진단 받으신 대표님
         <strong id="today-count">0</strong>명
       </p>
-      <h2 id="leadform-title" class="leadform__title">2025년 하반기<br>인천시 정책자금 컨설팅<br>무료상담 신청</h2>
+      <h2 id="leadform-title" class="leadform__title">2025년 하반기<br>인천광역시 제조업<br>정책자금 컨설팅<br>무료상담 신청</h2>
       <p class="leadform__desc" style="font-size: 18px;">
         오랜 경력을 가진 전문 컨설턴트가<br>
         대표님 기업에 필요한 <span style="color: #ffe600;"><b>한도·금리 조건</b></span>을 비교 분석해<br>
@@ -80,7 +80,7 @@ form.innerHTML = `
           <label for="region" class="lf__label">지역</label>
           <select id="region" name="entry.1446743340" class="lf__select" required>
             <option value="" selected disabled>지역을 선택해주세요</option>
-            <option value="인천시">인천시</option>
+            <option value="인천광역시">인천광역시</option>
           </select>
         </div>
 
